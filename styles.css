@@ -248,7 +248,7 @@ header {
 nav .sidebar {
     position: fixed;
     top: 99px; /* Przesunięcie w dół, aby nie kolidować z nagłówkiem */
-    width: 200px; /* Dostosuj szerokość paska nawigacyjnego */
+    width: 100px; /* Dostosuj szerokość paska nawigacyjnego */
     height: 83%; /* Aby zajmował całą wysokość */
     background-color: #2c3e50; /* Możesz dostosować kolor tła */
     overflow-y: auto; /* Dodaj przewijanie, jeśli zawartość jest zbyt długa */
