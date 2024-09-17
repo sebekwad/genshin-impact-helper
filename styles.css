@@ -330,7 +330,7 @@ main {
 
 @media (max-width: 768px) {
     header {
-        height: 60px;      /* Zmniejsza wysokość nagłówka na mniejszych ekranach */
+        height: 20px;      /* Zmniejsza wysokość nagłówka na mniejszych ekranach */
         padding: 5px 10px; /* Zmniejsza wypełnienie wewnętrzne */
     }
 }
