@@ -309,3 +309,21 @@ main {
 .artifact-item strong {
     margin: 0;                   /* Usuń ewentualny dodatkowy odstęp wokół tekstu */
 }
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .character-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;  /* Układa przyciski w dwóch kolumnach */
+    }
+
+    .character-list button {
+        width: 48%;   /* Dopasowanie szerokości przycisków do mniejszego ekranu */
+    }
+}
