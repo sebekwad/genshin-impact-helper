@@ -29,7 +29,7 @@ header {
 
 @media (max-width: 768px) {
     header h1 {
-        font-size: 24px;   /* Zmniejsz rozmiar czcionki tytułu */
+        font-size: 12px;   /* Zmniejsz rozmiar czcionki tytułu */
     }
 }
 
@@ -248,7 +248,7 @@ header {
 nav .sidebar {
     position: fixed;
     top: 99px; /* Przesunięcie w dół, aby nie kolidować z nagłówkiem */
-    width: 100px; /* Dostosuj szerokość paska nawigacyjnego */
+    width: 200px; /* Dostosuj szerokość paska nawigacyjnego */
     height: 83%; /* Aby zajmował całą wysokość */
     background-color: #2c3e50; /* Możesz dostosować kolor tła */
     overflow-y: auto; /* Dodaj przewijanie, jeśli zawartość jest zbyt długa */
@@ -325,5 +325,12 @@ main {
 
     .character-list button {
         width: 48%;   /* Dopasowanie szerokości przycisków do mniejszego ekranu */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        height: 60px;      /* Zmniejsza wysokość nagłówka na mniejszych ekranach */
+        padding: 5px 10px; /* Zmniejsza wypełnienie wewnętrzne */
     }
 }
