@@ -108,28 +108,32 @@ main {
 }
 
 .subtabs {
-    position: fixed;
-    top: 100px;
-    left: 200px;
+    position: relative; /* Zamień fixed na relative, aby przyciski przesuwały się z treścią */
+    top: auto;          /* Usuń stałe pozycjonowanie w pionie */
+    left: auto;         /* Usuń stałe pozycjonowanie w poziomie */
+    width: 100%;        /* Dopasowanie szerokości do całego ekranu na telefonie */
     z-index: 1000;
     background-color: #f4f4f4;
     padding: 10px;
-    width: calc(100% - 220px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Ustawienia dla przycisków subtabs */
 .subtab-button {
+    position: relative; /* Usuń fixed i ustaw relative, aby przyciski przewijały się */
     padding: 10px 20px;
     background-color: #34495e;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    display: inline-block;
 }
 
 .subtab-button:hover {
     background-color: #1abc9c;
 }
+
 
 .character-content {
     display: none;
@@ -209,7 +213,7 @@ main {
 
 @media (max-width: 768px) {
     .subtabs {
-        position: static; /* Na telefonie przyciski przesuwają się z treścią */
+        position: realtive; /* Na telefonie przyciski przesuwają się z treścią */
         width: 100%;
         top: auto;
         left: auto;
