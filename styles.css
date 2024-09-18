@@ -206,3 +206,16 @@ main {
     margin-right: 10px;
     margin-left: 10px;
 }
+
+@media (max-width: 768px) {
+    .subtabs {
+        position: relative; /* Na telefonie przyciski przesuwają się z treścią */
+        width: 100%;
+        top: auto;
+        left: auto;
+    }
+
+    .subtab-button {
+        position: relative; /* Upewnij się, że przyciski nie są zakotwiczone */
+    }
+}
