@@ -209,7 +209,7 @@ main {
 
 @media (max-width: 768px) {
     .subtabs {
-        position: relative; /* Na telefonie przyciski przesuwają się z treścią */
+        position: static; /* Na telefonie przyciski przesuwają się z treścią */
         width: 100%;
         top: auto;
         left: auto;
