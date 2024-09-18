@@ -11,14 +11,16 @@ header {
     color: white;
     text-align: center;
     padding: 10px;
+    font-size: 24px; /* Zmniejszono domyślny rozmiar czcionki */
 }
 
 .sidebar {
-    width: 100px;
+    width: 200px; /* Szerokość paska bocznego */
     background-color: #2c3e50;
     position: fixed;
     height: 100%;
     padding-top: 20px;
+    overflow-y: auto; /* Dodano przewijanie */
 }
 
 .sidebar h2 {
@@ -27,12 +29,40 @@ header {
     margin-bottom: 20px;
 }
 
+/* Responsywny nagłówek i pasek boczny */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 12px;   /* Zmniejsz rozmiar czcionki tytułu */
+    header {
+        height: 50px;
+        font-size: 18px; /* Zmniejsz rozmiar czcionki nagłówka na mniejszych ekranach */
+        padding: 5px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .character-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .character-list button {
+        width: 48%; /* Przyciski postaci układają się obok siebie na mniejszych ekranach */
+    }
+
+    main {
+        margin-left: 0; /* Usuń marginesy, by dopasować treść na mniejszych ekranach */
+        padding-top: 60px; /* Dopasowanie paddingu, uwzględniając zmniejszoną wysokość nagłówka */
+    }
+
+    .subtabs {
+        position: static; /* Usuń stałe pozycjonowanie subtabs */
+        width: 100%; /* Dopasowanie szerokości zakładek do ekranu */
     }
 }
-
 
 .character-list {
     list-style-type: none;
@@ -61,47 +91,31 @@ header {
 }
 
 .character-list button.active {
-    background-color: #1abc9c; /* Kolor tła dla aktywnego przycisku */
-    color: white; /* Kolor tekstu dla aktywnego przycisku */
-    font-weight: bold; /* Pogrubienie tekstu dla lepszej widoczności */
-}
-
-.character-list button {
-    transition: background-color 0.3s, color 0.3s; /* Płynna zmiana koloru */
-}
-
-.character-list button.active {
-    background-color: #1abc9c; /* Kolor tła dla aktywnego przycisku */
-    color: white; /* Kolor tekstu dla aktywnego przycisku */
-    font-weight: bold; /* Pogrubienie tekstu dla lepszej widoczności */
+    background-color: #1abc9c;
+    font-weight: bold;
 }
 
 .character-image {
-    width: 40px; /* Dopasuj rozmiar do swoich potrzeb */
-    height: 40px; /* Dopasuj rozmiar do swoich potrzeb */
-    border-radius: 50%; /* Jeśli chcesz, aby obrazki były okrągłe */
-    margin-right: 10px; /* Odstęp między obrazkiem a tekstem */
-}
-
-
-.character-list i {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     margin-right: 10px;
 }
 
 main {
-    margin-left: 300px;
-    padding: 20px;
+    margin-left: 220px; /* Dostosowano do szerokości paska nawigacyjnego */
+    padding-top: 160px;
 }
 
 .subtabs {
     position: fixed;
-    top: 100px; /* Ustawienie poniżej nagłówka */
-    left: 200px; /* Ustawienie obok sidebaru */
-    z-index: 1000; /* Aby zakładki były nad innymi elementami */
-    background-color: #f4f4f4; /* Dostosuj kolor tła */
+    top: 100px;
+    left: 200px;
+    z-index: 1000;
+    background-color: #f4f4f4;
     padding: 10px;
-    width: calc(100% - 220px); /* Dopasowanie szerokości do reszty strony */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Opcjonalny cień */
+    width: calc(100% - 220px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .subtab-button {
@@ -111,37 +125,18 @@ main {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    display: fixed;
-    align-items: center;
-}
-
-.subtab-button i {
-    margin-right: 10px;
 }
 
 .subtab-button:hover {
     background-color: #1abc9c;
 }
 
-/* Zaktualizowane style do zarządzania widocznością zakładek i podzakładek */
 .character-content {
-    display: none; /* Ukrywa wszystkie sekcje postaci na początku */
+    display: none;
 }
 
 .character-content.active {
-    display: block; /* Pokazuje aktywną sekcję postaci */
-}
-
-.subtab-content {
-    display: none; /* Ukrywa wszystkie podzakładki na początku */
-}
-
-.subtab-content.active {
-    display: block; /* Pokazuje aktywną podzakładkę */
-}
-
-.build-section h3 {
-    margin-top: 0;
+    display: block;
 }
 
 .build-section {
@@ -150,14 +145,14 @@ main {
 
 .team-container {
     display: flex;
-    justify-content: space-between; /* Równanie elementów w poziomie */
-    gap: 20px; /* Odstęp między kolumnami */
-    flex-wrap: wrap; /* Przenoszenie elementów do następnego wiersza, jeśli nie mieszczą się w jednym */
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .team-role {
-    flex: 1; /* Sprawia, że każda kolumna zajmuje równą ilość miejsca */
-    text-align: center; /* Wyśrodkowanie tekstu */
+    flex: 1;
+    text-align: center;
 }
 
 .team-role img {
@@ -166,15 +161,11 @@ main {
     border-radius: 50%;
     margin-bottom: 5px;
 }
-/* Ogólne style dla kontenera drużyn */
+
 .team-list {
     margin: 0;
     padding: 0;
     list-style: none;
-}
-
-.team {
-    margin-bottom: 2rem;
 }
 
 .team h3 {
@@ -184,153 +175,34 @@ main {
     border-bottom: 2px solid #ddd;
 }
 
-/* Stylizacja dla kontenera postaci w drużynie */
-.team-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.team-role {
-    flex: 1 1 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.team-role img {
-    width: 100px; /* Dostosuj do odpowiednich rozmiarów */
-    height: auto;
-    border-radius: 8px;
-}
-
-.team-role p {
-    margin: 0.5rem 0;
-}
-
-/* Stylizacja sekcji Strengths & Weaknesses */
-.strengths-weaknesses {
-    margin-top: 1rem;
-}
-
-.strengths-weaknesses h3 {
-    margin-bottom: 0.5rem;
-}
-
-.strengths-weaknesses ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-}
-
-.strengths-weaknesses ul li {
-    margin-bottom: 0.5rem;
-}
-
-/* Możesz również dodać style dla całej zawartości subzakładki */
-.subtab-content {
-    display: none; /* Domyślnie ukryte */
-}
-
-.subtab-content.active {
-    display: block; /* Pokaż, gdy aktywne */
-}
-/* Ustaw nagłówek na stałą pozycję */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #333; /* Możesz dostosować kolor tła */
-    z-index: 1000; /* Zapewnia, że nagłówek jest nad innymi elementami */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Delikatny cień, aby wyróżnić nagłówek */
-}
-/* Ustaw pasek nawigacyjny na stałą pozycję */
-nav .sidebar {
-    position: fixed;
-    top: 99px; /* Przesunięcie w dół, aby nie kolidować z nagłówkiem */
-    width: 200px; /* Dostosuj szerokość paska nawigacyjnego */
-    height: 83%; /* Aby zajmował całą wysokość */
-    background-color: #2c3e50; /* Możesz dostosować kolor tła */
-    overflow-y: auto; /* Dodaj przewijanie, jeśli zawartość jest zbyt długa */
-    z-index: 1000; /* Aby była nad innymi treściami */
-}
-
-/* Główna zawartość powinna być przesunięta w prawo, aby nie była zasłonięta przez sidebar */
-main {
-    margin-left: 220px; /* Dostosuj do szerokości paska nawigacyjnego */
-    padding-top: 160px; /* Dostosuj do wysokości nagłówka */
-}
-/* Style dla dwóch kolumn */
-.build-columns {
-    display: flex;
-    gap: 20px; /* Odstęp między kolumnami */
-}
-
-.build-column {
-    flex: 1; /* Każda kolumna zajmuje równą szerokość */
-}
-
-/* Zapewnienie, że kolumny będą w pionie na mniejszych ekranach */
 @media (max-width: 768px) {
-    .build-columns {
-        flex-direction: column;
+    .team-container {
+        flex-direction: column; /* Zmiana układu drużyny na pionowy na mniejszych ekranach */
     }
 }
 
+/* Zmniejszenie elementów broni na mniejszych ekranach */
 .weapon-item {
-    display: flex;               /* Ustawia elementy wewnątrz kontenera w jednym rzędzie */
-    align-items: center;         /* Wyrównuje elementy pionowo do środka */
-    margin-bottom: 10px;         /* Odstęp poniżej elementu */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .weapon-image {
-    width: 40px;                 /* Dostosuj rozmiar obrazka */
+    width: 40px;
     height: 40px;
-    margin-right: 10px;          /* Odstęp między obrazkiem a tekstem */
-}
-
-.weapon-item strong {
-    margin: 0;                   /* Usuń ewentualny dodatkowy odstęp wokół tekstu */
+    margin-right: 10px;
 }
 
 .artifact-item {
-    display: flex;               /* Ustawia elementy wewnątrz kontenera w jednym rzędzie */
-    align-items: center;         /* Wyrównuje elementy pionowo do środka */
-    margin-bottom: 10px;         /* Odstęp poniżej elementu */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .artifact-image {
-    width: 40px;                 /* Dostosuj rozmiar obrazka */
+    width: 40px;
     height: 40px;
-    margin-right: 10px;          /* Odstęp między obrazkiem a tekstem */
-	margin-left: 10px;
-}
-
-.artifact-item strong {
-    margin: 0;                   /* Usuń ewentualny dodatkowy odstęp wokół tekstu */
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-    
-    .character-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;  /* Układa przyciski w dwóch kolumnach */
-    }
-
-    .character-list button {
-        width: 48%;   /* Dopasowanie szerokości przycisków do mniejszego ekranu */
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        height: 20px;      /* Zmniejsza wysokość nagłówka na mniejszych ekranach */
-        padding: 5px 10px; /* Zmniejsza wypełnienie wewnętrzne */
-    }
+    margin-right: 10px;
+    margin-left: 10px;
 }
