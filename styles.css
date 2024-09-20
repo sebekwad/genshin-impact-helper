@@ -203,6 +203,41 @@ main {
     }
 }
 
+/* Dodatkowe style dla telefonu w orientacji poziomej */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .sidebar {
+        width: 100px; /* Zmniejszenie szerokości sidebaru dla orientacji poziomej */
+        height: 100%;
+        top: 0;
+    }
+
+    main {
+        margin-left: 120px; /* Dostosowanie głównej zawartości do nowej szerokości sidebaru */
+        padding-top: 80px;
+    }
+
+    .subtabs {
+        left: 120px; /* Dostosowanie do mniejszej szerokości sidebaru */
+        width: calc(100% - 120px);
+    }
+
+    .build-columns {
+        flex-direction: row;
+    }
+
+    .team-role {
+        flex: 1 1 25%;
+    }
+
+    .team-role img {
+        width: 80px; /* Zmniejszenie rozmiaru obrazów drużyny */
+    }
+
+    .character-list button {
+        font-size: 14px; /* Zmniejszenie czcionki przycisków */
+    }
+}
+
 @media (max-width: 480px) {
     .character-list button {
         font-size: 14px;
