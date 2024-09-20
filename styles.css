@@ -11,22 +11,23 @@ header {
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    top: 0;
     width: 100%;
-    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh; /* Zapewnia pełną wysokość strony */
 }
 
 .sidebar {
     width: 200px;
     background-color: #2c3e50;
-    position: fixed;
-    top: 99px;
-    height: calc(100% - 99px);
     padding-top: 20px;
+    flex-shrink: 0; /* Zapewnia, że pasek boczny nie zmniejszy się */
+    height: auto;
     overflow-y: auto;
-    z-index: 1000;
 }
 
 .sidebar h2 {
@@ -76,20 +77,16 @@ header {
 }
 
 main {
-    margin-left: 220px;
+    flex: 1; /* Elastyczna szerokość - zajmuje pozostałą przestrzeń */
     padding: 20px;
-    padding-top: 160px;
 }
 
 .subtabs {
-    position: fixed;
-    top: 100px;
-    left: 200px;
-    z-index: 1000;
     background-color: #f4f4f4;
     padding: 10px;
-    width: calc(100% - 220px);
+    width: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .subtab-button {
@@ -177,21 +174,22 @@ main {
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
     .sidebar {
         width: 100%;
         height: auto;
-        position: static;
         padding: 10px;
     }
 
     main {
-        margin-left: 0;
         padding-top: 20px;
     }
 
     .subtabs {
         width: 100%;
-        left: 0;
     }
 
     .build-columns {
@@ -207,18 +205,11 @@ main {
 @media (max-width: 1024px) and (orientation: landscape) {
     .sidebar {
         width: 100px; /* Zmniejszenie szerokości sidebaru dla orientacji poziomej */
-        height: 100%;
-        top: 0;
+        padding-top: 10px;
     }
 
     main {
-        margin-left: 120px; /* Dostosowanie głównej zawartości do nowej szerokości sidebaru */
         padding-top: 80px;
-    }
-
-    .subtabs {
-        left: 120px; /* Dostosowanie do mniejszej szerokości sidebaru */
-        width: calc(100% - 120px);
     }
 
     .build-columns {
