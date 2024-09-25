@@ -317,3 +317,11 @@ main {
 .character-content.active, .subtab-content.active {
     display: block; /* Pokaż aktywne zakładki i podzakładki */
 }
+
+/* Styl dla ekranów o szerokości poniżej 768px (np. telefon) */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}
