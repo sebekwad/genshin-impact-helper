@@ -346,5 +346,5 @@ main {
 }
 
 .artifact p {
-    margin: 0; /* Usuwa dodatkowe marginesy między paragrafami */
+    margin: 10; /* Usuwa dodatkowe marginesy między paragrafami */
 }
