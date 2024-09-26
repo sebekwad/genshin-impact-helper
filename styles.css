@@ -325,3 +325,26 @@ main {
         padding: 10px;
     }
 }
+
+.weapon-comment {
+    border: 2px solid red;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.weapon-comment p {
+    margin: 10; /* Usuwa dodatkowe marginesy między paragrafami */
+}
+
+
+.artifact-comment {
+    border: 2px solid red;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.artifact p {
+    margin: 0; /* Usuwa dodatkowe marginesy między paragrafami */
+}
