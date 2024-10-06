@@ -19,6 +19,7 @@ header {
     position: fixed;
     height: 100%;
     padding-top: 20px;
+	overflow-y: auto;
 }
 
 .sidebar h2 {
@@ -268,6 +269,16 @@ main {
     .build-columns {
         flex-direction: column;
     }
+	.main {
+        width: 100%;
+        padding: 10px;
+    }
+	.sidebar {
+        width: 100px;
+    }
+    .character-list button {
+        font-size: 14px;
+    }
 }
 
 .weapon-item {
@@ -318,14 +329,6 @@ main {
     display: block; /* Pokaż aktywne zakładki i podzakładki */
 }
 
-/* Styl dla ekranów o szerokości poniżej 768px (np. telefon) */
-@media (max-width: 768px) {
-    .main {
-        width: 100%;
-        padding: 10px;
-    }
-}
-
 .weapon-comment {
     border: 2px solid red;
     padding: 10px;
@@ -347,4 +350,35 @@ main {
 
 .artifact p {
     margin: 10; /* Usuwa dodatkowe marginesy między paragrafami */
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+/* Search Input */
+header input#character-search {
+    width: 200px;
+    padding: 8px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Lazy Loading for Images */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
 }
