@@ -303,4 +303,9 @@ main {
         width: 80px; /* Dostosuj do odpowiednich rozmiarów */
         height: auto;
     }
+    .character-list {
+    list-style-type: none;
+    padding: 0;
+	width: 10%
+    }
 }
