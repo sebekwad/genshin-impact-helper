@@ -19,7 +19,7 @@ header {
     position: fixed;
     height: 100%;
     padding-top: 20px;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
 .sidebar h2 {
@@ -48,11 +48,20 @@ header {
     font-size: 16px;
     display: flex;
     align-items: center;
-    transition: background-color 0.3s, color 0.3s; /* Płynna zmiana koloru */
 }
 
 .character-list button:hover {
     background-color: #1abc9c;
+}
+
+.character-list button.active {
+    background-color: #1abc9c; /* Kolor tła dla aktywnego przycisku */
+    color: white; /* Kolor tekstu dla aktywnego przycisku */
+    font-weight: bold; /* Pogrubienie tekstu dla lepszej widoczności */
+}
+
+.character-list button {
+    transition: background-color 0.3s, color 0.3s; /* Płynna zmiana koloru */
 }
 
 .character-list button.active {
@@ -67,6 +76,7 @@ header {
     border-radius: 50%; /* Jeśli chcesz, aby obrazki były okrągłe */
     margin-right: 10px; /* Odstęp między obrazkiem a tekstem */
 }
+
 
 .character-list i {
     margin-right: 10px;
@@ -95,7 +105,7 @@ main {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    display: inline-flex; /* Użyj inline-flex zamiast fixed */
+    display: fixed;
     align-items: center;
 }
 
@@ -150,7 +160,6 @@ main {
     border-radius: 50%;
     margin-bottom: 5px;
 }
-
 /* Ogólne style dla kontenera drużyn */
 .team-list {
     margin: 0;
@@ -220,7 +229,6 @@ main {
 .subtab-content.active {
     display: block; /* Pokaż, gdy aktywne */
 }
-
 /* Ustaw nagłówek na stałą pozycję */
 header {
     position: fixed;
@@ -230,7 +238,6 @@ header {
     z-index: 1000; /* Zapewnia, że nagłówek jest nad innymi elementami */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Delikatny cień, aby wyróżnić nagłówek */
 }
-
 /* Ustaw pasek nawigacyjny na stałą pozycję */
 nav .sidebar {
     position: fixed;
@@ -247,7 +254,6 @@ main {
     margin-left: 220px; /* Dostosuj do szerokości paska nawigacyjnego */
     padding-top: 160px; /* Dostosuj do wysokości nagłówka */
 }
-
 /* Style dla dwóch kolumn */
 .build-columns {
     display: flex;
@@ -263,49 +269,143 @@ main {
     .build-columns {
         flex-direction: column;
     }
-    
-    main {
+	.main {
         width: 100%;
         padding: 10px;
-        margin-left: 0; /* Usunięcie przesunięcia w lewo */
-        padding-top: 80px; /* Dostosowanie paddingu do wysokości nagłówka */
     }
-
-    .sidebar {
-        width: 10%;
+	.sidebar {
+        width: 100px;
     }
-
     .character-list button {
         font-size: 14px;
-        padding: 8px; /* Dostosowanie paddingu dla lepszej responsywności */
     }
+	.character-list button {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: #34495e;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    }
+}
 
-    .character-list button {
-        width: 100%;
-        padding: 10px;
-        color: white;
-        background-color: #34495e;
-        border: none;
-        text-align: left;
-        cursor: pointer;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        transition: background-color 0.3s, color 0.3s; /* Płynna zmiana koloru */
-    }
+.weapon-item {
+    display: flex;               /* Ustawia elementy wewnątrz kontenera w jednym rzędzie */
+    align-items: center;         /* Wyrównuje elementy pionowo do środka */
+    margin-bottom: 10px;         /* Odstęp poniżej elementu */
+}
 
-    .character-image {
-        width: 30px; /* Dostosowanie wielkości obrazka */
-        height: 30px; /* Dostosowanie wielkości obrazka */
-    }
+.weapon-image {
+    width: 40px;                 /* Dostosuj rozmiar obrazka */
+    height: 40px;
+    margin-right: 10px;          /* Odstęp między obrazkiem a tekstem */
+}
 
-    .team-role img {
-        width: 80px; /* Dostosuj do odpowiednich rozmiarów */
-        height: auto;
-    }
-    .character-list {
-    list-style-type: none;
-    padding: 0;
-	width: 10%
-    }
+.weapon-item strong {
+    margin: 0;                   /* Usuń ewentualny dodatkowy odstęp wokół tekstu */
+}
+
+.artifact-item {
+    display: flex;               /* Ustawia elementy wewnątrz kontenera w jednym rzędzie */
+    align-items: center;         /* Wyrównuje elementy pionowo do środka */
+    margin-bottom: 10px;         /* Odstęp poniżej elementu */
+}
+
+.artifact-image {
+    width: 40px;                 /* Dostosuj rozmiar obrazka */
+    height: 40px;
+    margin-right: 10px;          /* Odstęp między obrazkiem a tekstem */
+	margin-left: 10px;
+}
+
+.artifact-item strong {
+    margin: 0;                   /* Usuń ewentualny dodatkowy odstęp wokół tekstu */
+}
+
+
+
+
+
+
+
+
+.character-content, .subtab-content {
+    display: none; /* Ukryj wszystkie zakładki i podzakładki domyślnie */
+}
+
+.character-content.active, .subtab-content.active {
+    display: block; /* Pokaż aktywne zakładki i podzakładki */
+}
+
+.weapon-comment {
+    border: 2px solid red;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.weapon-comment p {
+    margin: 10; /* Usuwa dodatkowe marginesy między paragrafami */
+}
+
+
+.artifact-comment {
+    border: 2px solid red;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.artifact p {
+    margin: 10; /* Usuwa dodatkowe marginesy między paragrafami */
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+/* Search Input */
+header input#character-search {
+    width: 200px;
+    padding: 8px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Lazy Loading for Images */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+#show-teams {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: #34495e;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#show-teams:hover {
+    background-color: #1abc9c;
 }
