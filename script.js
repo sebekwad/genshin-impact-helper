@@ -54,10 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("toggle-sidebar").addEventListener("click", function() {
-    const sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("hidden");
+        const sidebar = document.getElementById("character-sidebar");
+        sidebar.classList.toggle("hidden");
+    });
 });
+
 
     
     // Wyszukiwanie postaci
