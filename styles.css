@@ -469,9 +469,9 @@ img[loading="lazy"].loaded {
 }
 
 .sidebar {
-    transition: transform 0.3s ease; /* Płynna animacja przy chowaniu */
+    transition: width 0.3s ease; /* Animacja zwijania */
 }
 
-.sidebar.hidden {
-    transform: translateX(-100%); /* Chowanie sidebaru */
+.sidebar.collapsed {
+    width: 50px; /* Szerokość zwiniętego sidebaru */
 }
