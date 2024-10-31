@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    document.getElementById("toggle-sidebar").addEventListener("click", function() {
+    const sidebar = document.getElementById("character-sidebar");
+    sidebar.classList.toggle("hidden");
+});
+
+    
     // Wyszukiwanie postaci
     searchInput.addEventListener('input', () => {
         const searchValue = searchInput.value.toLowerCase();
