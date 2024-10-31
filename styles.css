@@ -473,5 +473,18 @@ img[loading="lazy"].loaded {
 }
 
 .sidebar.collapsed {
-    width: 50px; /* Szerokość zwiniętego sidebaru */
+    width: 50px; /* Szerokość po zwinięciu */
 }
+
+.sidebar.collapsed h2 {
+    display: none; /* Ukryj nagłówek, gdy jest zwinięty */
+}
+
+.character-list {
+    display: none; /* Ukryj listę postaci, gdy sidebar jest zwinięty */
+}
+
+.sidebar:not(.collapsed) .character-list {
+    display: block; /* Pokaż listę postaci, gdy sidebar jest rozwinięty */
+}
+
