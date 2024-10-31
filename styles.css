@@ -474,6 +474,7 @@ img[loading="lazy"].loaded {
 
 .sidebar.collapsed {
     width: 50px; /* Szerokość po zwinięciu */
+    height: 50px
 }
 
 .sidebar.collapsed h2 {
