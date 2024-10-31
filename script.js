@@ -54,12 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("toggle-sidebar").addEventListener("click", function() {
-        const sidebar = document.getElementById("character-sidebar");
-        sidebar.classList.toggle("hidden");
-    });
+    document.getElementById("toggleSidebar").addEventListener("click", function() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("collapsed"); // Dodaj lub usuń klasę "collapsed"
+    
+    // Zmień tekst przycisku w zależności od stanu sidebaru
+    this.textContent = sidebar.classList.contains("collapsed") ? "Rozwiń" : "Zwiń";
 });
+
 
 
     
