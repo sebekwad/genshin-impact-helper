@@ -311,6 +311,7 @@ main {
 @media (max-width: 600px) {
     header {
         padding: 5px; /* Mniejsze paddingi w nagłówku */
+	position: relative;
     }
 
     .sidebar {
@@ -320,6 +321,12 @@ main {
     .character-list button {
         font-size: 12px; /* Mniejsze przyciski na smartfonach */
         padding: 8px; /* Mniejsze przyciski */
+    }
+	.subtabs {
+        position: relative; /* Zmiana na relative, aby przewijały się z resztą treści */
+        top: 0; /* Resetuje pozycję top */
+        left: 0; /* Resetuje pozycję left */
+        width: 100%; /* Szerokość 100% dla lepszej responsywności */
     }
 }
 
