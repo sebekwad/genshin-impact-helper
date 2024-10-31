@@ -268,7 +268,7 @@ main {
 @media (max-width: 768px) {
     header {
         padding: 5px; /* Mniejsze paddingi w nagłówku */
-	position: relative;
+        position: relative;
     }
 
     .sidebar {
@@ -279,11 +279,17 @@ main {
         font-size: 12px; /* Mniejsze przyciski na smartfonach */
         padding: 8px; /* Mniejsze przyciski */
     }
-	.subtabs {
+
+    .subtabs {
         position: relative; /* Zmiana na relative, aby przewijały się z resztą treści */
         top: 0; /* Resetuje pozycję top */
         left: 0; /* Resetuje pozycję left */
         width: 100%; /* Szerokość 100% dla lepszej responsywności */
+    }
+
+    main {
+        margin-left: 0; /* Resetuje margines na mniejszych ekranach */
+        padding-top: 60px; /* Ustawia padding z góry dla nagłówka */
     }
 }
 
@@ -291,7 +297,7 @@ main {
 @media (max-width: 1024px) {
     header {
         padding: 5px; /* Mniejsze paddingi w nagłówku */
-	position: relative;
+        position: relative;
     }
 
     .sidebar {
@@ -302,11 +308,17 @@ main {
         font-size: 12px; /* Mniejsze przyciski na smartfonach */
         padding: 8px; /* Mniejsze przyciski */
     }
-	.subtabs {
+
+    .subtabs {
         position: relative; /* Zmiana na relative, aby przewijały się z resztą treści */
         top: 0; /* Resetuje pozycję top */
         left: 0; /* Resetuje pozycję left */
         width: 100%; /* Szerokość 100% dla lepszej responsywności */
+    }
+
+    main {
+        margin-left: 0; /* Resetuje margines na mniejszych ekranach */
+        padding-top: 60px; /* Ustawia padding z góry dla nagłówka */
     }
 }
 
@@ -314,7 +326,7 @@ main {
 @media (max-width: 600px) {
     header {
         padding: 5px; /* Mniejsze paddingi w nagłówku */
-	position: relative;
+        position: relative;
     }
 
     .sidebar {
@@ -325,11 +337,17 @@ main {
         font-size: 12px; /* Mniejsze przyciski na smartfonach */
         padding: 8px; /* Mniejsze przyciski */
     }
-	.subtabs {
+
+    .subtabs {
         position: relative; /* Zmiana na relative, aby przewijały się z resztą treści */
         top: 0; /* Resetuje pozycję top */
         left: 0; /* Resetuje pozycję left */
         width: 100%; /* Szerokość 100% dla lepszej responsywności */
+    }
+
+    main {
+        margin-left: 0; /* Resetuje margines na mniejszych ekranach */
+        padding-top: 60px; /* Ustawia padding z góry dla nagłówka */
     }
 }
 
