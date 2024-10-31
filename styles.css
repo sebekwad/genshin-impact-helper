@@ -266,30 +266,60 @@ main {
 
 /* Zapewnienie, że kolumny będą w pionie na mniejszych ekranach */
 @media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Rozszerz sidebar na 100% w mniejszych ekranach */
+        height: auto; /* Umożliwia przewijanie */
+        position: relative; /* Zmiana na względną pozycję */
+        top: 0; /* Ustawienie na górze */
+    }
+
+    main {
+        margin-left: 0; /* Resetuje margines dla głównej zawartości */
+        padding-top: 60px; /* Ustawia miejsce dla nagłówka */
+    }
+
+    .subtabs {
+        position: relative; /* Zmiana na względną pozycję */
+        top: 0; /* Ustawienie na górze */
+        left: 0; /* Ustawienie na górze */
+        width: 100%; /* Rozszerzenie na 100% w mniejszych ekranach */
+    }
+
     .build-columns {
-        flex-direction: column;
+        flex-direction: column; /* Zmiana na kolumnową orientację */
     }
-	.main {
-        width: 80%;
-        padding: 10px;
-    }
-	.sidebar {
-        width: 20%;
-    }
+
     .character-list button {
-        font-size: 14px;
+        font-size: 14px; /* Dostosowanie rozmiaru czcionki */
     }
-	.character-list button {
-    width: 100%;
-    padding: 10px;
-    color: white;
-    background-color: #34495e;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
+
+    .character-list button {
+        width: 100%; /* Umożliwia przyciskom zajmowanie pełnej szerokości */
+        padding: 10px; /* Dostosowanie paddingu */
+        background-color: #2c3e50; /* Kolor tła przycisków */
+    }
+}
+
+/* Stylizacja dla tabletów */
+@media (max-width: 1024px) {
+    .character-list button {
+        font-size: 16px; /* Dostosowanie rozmiaru czcionki */
+    }
+}
+
+/* Stylizacja dla smartfonów */
+@media (max-width: 600px) {
+    header {
+        padding: 5px; /* Mniejsze paddingi w nagłówku */
+    }
+
+    .sidebar {
+        font-size: 14px; /* Dostosowanie rozmiaru czcionki */
+    }
+
+    .character-list button {
+        font-size: 12px; /* Mniejsze przyciski na smartfonach */
+        padding: 8px; /* Mniejsze przyciski */
     }
 }
 
