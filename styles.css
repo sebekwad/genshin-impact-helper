@@ -467,3 +467,11 @@ img[loading="lazy"].loaded {
 #show-teams:hover {
     background-color: #1abc9c;
 }
+
+.sidebar {
+    transition: transform 0.3s ease; /* Płynna animacja przy chowaniu */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%); /* Chowanie sidebaru */
+}
