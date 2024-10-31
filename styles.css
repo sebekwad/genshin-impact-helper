@@ -266,44 +266,47 @@ main {
 
 /* Zapewnienie, że kolumny będą w pionie na mniejszych ekranach */
 @media (max-width: 768px) {
+    header {
+        padding: 5px; /* Mniejsze paddingi w nagłówku */
+	position: relative;
+    }
+
     .sidebar {
-        width: 100%; /* Rozszerz sidebar na 100% w mniejszych ekranach */
-        height: auto; /* Umożliwia przewijanie */
-        position: relative; /* Zmiana na względną pozycję */
-        top: 0; /* Ustawienie na górze */
-    }
-
-    main {
-        margin-left: 0; /* Resetuje margines dla głównej zawartości */
-        padding-top: 60px; /* Ustawia miejsce dla nagłówka */
-    }
-
-    .subtabs {
-        position: relative; /* Zmiana na względną pozycję */
-        top: 0; /* Ustawienie na górze */
-        left: 0; /* Ustawienie na górze */
-        width: 100%; /* Rozszerzenie na 100% w mniejszych ekranach */
-    }
-
-    .build-columns {
-        flex-direction: column; /* Zmiana na kolumnową orientację */
-    }
-
-    .character-list button {
         font-size: 14px; /* Dostosowanie rozmiaru czcionki */
     }
 
     .character-list button {
-        width: 100%; /* Umożliwia przyciskom zajmowanie pełnej szerokości */
-        padding: 10px; /* Dostosowanie paddingu */
-        background-color: #2c3e50; /* Kolor tła przycisków */
+        font-size: 12px; /* Mniejsze przyciski na smartfonach */
+        padding: 8px; /* Mniejsze przyciski */
+    }
+	.subtabs {
+        position: relative; /* Zmiana na relative, aby przewijały się z resztą treści */
+        top: 0; /* Resetuje pozycję top */
+        left: 0; /* Resetuje pozycję left */
+        width: 100%; /* Szerokość 100% dla lepszej responsywności */
     }
 }
 
 /* Stylizacja dla tabletów */
 @media (max-width: 1024px) {
+    header {
+        padding: 5px; /* Mniejsze paddingi w nagłówku */
+	position: relative;
+    }
+
+    .sidebar {
+        font-size: 14px; /* Dostosowanie rozmiaru czcionki */
+    }
+
     .character-list button {
-        font-size: 16px; /* Dostosowanie rozmiaru czcionki */
+        font-size: 12px; /* Mniejsze przyciski na smartfonach */
+        padding: 8px; /* Mniejsze przyciski */
+    }
+	.subtabs {
+        position: relative; /* Zmiana na relative, aby przewijały się z resztą treści */
+        top: 0; /* Resetuje pozycję top */
+        left: 0; /* Resetuje pozycję left */
+        width: 100%; /* Szerokość 100% dla lepszej responsywności */
     }
 }
 
