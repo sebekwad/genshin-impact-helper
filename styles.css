@@ -9,21 +9,24 @@ body, html {
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 200px 1fr;
-    height: 100vh;
+    height: auto; /* Zmiana na auto, aby strona była przewijalna */
 }
 
 .header {
     grid-column: span 2;
     background-color: #333;
     color: white;
-    padding: 10px;
+    padding: 2px;
     text-align: center;
+	font-size: 1rem; /* Opcjonalne zmniejszenie rozmiaru tekstu dla większej kompaktowości */
+	position: static; /* Wymuszenie normalnej pozycji w przepływie dokumentu */
 }
 
 .sidebar {
     background-color: #2c3e50;
     color: white;
     padding: 10px;
+	height: 100vh; /* Wysokość dostosowana do całego ekranu */
     overflow-y: auto;
 }
 
