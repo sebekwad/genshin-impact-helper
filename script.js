@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
     characterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const characterId = button.getAttribute('data-character');
+			characterButtons.forEach(btn => btn.classList.remove('active'));
             characterContents.forEach(content => content.classList.remove('active'));
+			button.classList.add('active');
             document.getElementById(characterId).classList.add('active');
         });
     });
@@ -34,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     subtabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const subtabId = button.getAttribute('data-subtab');
+            subtabButtons.forEach(btn => btn.classList.remove('active'));
             subtabContents.forEach(content => content.classList.remove('active'));
+            button.classList.add('active');
             document.getElementById(subtabId).classList.add('active');
         });
     });
