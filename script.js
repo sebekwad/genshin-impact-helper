@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtabButtons = document.querySelectorAll('.subtab-button');
     const subtabContents = document.querySelectorAll('.subtab-content');
 	const ownedCheckboxes = document.querySelectorAll('.owned-checkbox');
+	const sidebar = document.querySelector('.sidebar');
+    const toggleButton = document.getElementById('toggleSidebar');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        // Zmień ikonę przycisku na podstawie stanu sidebaru
+        toggleButton.textContent = sidebar.classList.contains('collapsed') ? '⮞' : '⮜';
+    });
 
     // Przełącznik trybu ciemnego
     themeToggle.addEventListener('click', () => {
@@ -14,12 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Wyszukiwanie postaci
     characterSearch.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        characterButtons.forEach(button => {
-            const characterName = button.textContent.toLowerCase();
-            button.style.display = characterName.includes(query) ? '' : 'none';
-        });
+    const query = e.target.value.toLowerCase();
+    characterButtons.forEach(button => {
+        const characterName = button.textContent.toLowerCase();
+        const listItem = button.closest('li'); // Pobieramy całe <li>, w którym znajduje się button i checkbox
+
+        if (listItem) {
+            listItem.style.display = characterName.includes(query) ? '' : 'none';
+        }
     });
+});
+
 
     // Obsługa przełączania zakładek
     characterButtons.forEach(button => {
@@ -40,8 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
             subtabContents.forEach(content => content.classList.remove('active'));
             button.classList.add('active');
             document.getElementById(subtabId).classList.add('active');
+			
+			updateSidebarHeight();  // Aktualizuj wysokość sidebaru
         });
     });
+
+    function updateSidebarHeight() {
+    const activeSubtabContent = document.querySelector('.subtab-content.active');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (activeSubtabContent && sidebar) {
+        const contentHeight = activeSubtabContent.scrollHeight;
+        sidebar.style.height = `${contentHeight}px`;
+    }
+}
+
 
     // Tooltipy
     characterButtons.forEach(button => {
@@ -157,3 +183,5 @@ function updateTeamsDisplay() {
         });
     });
 }
+
+    updateSidebarHeight();
