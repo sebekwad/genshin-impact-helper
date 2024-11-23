@@ -91,7 +91,7 @@ button:hover {
 }
 
 .dark-mode {
-    background-color: #333;
+    background-color: #000000;
     color: white;
 }
 
@@ -263,4 +263,118 @@ button:hover {
 
 .owned-checkbox {
    transform: scale(1.8); /* Powiększa checkboxa 1,5 razy */
+}
+
+
+
+
+
+
+/* Główna tabela */
+.info-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #ccc; /* Ramka dla całej tabeli */
+    border-radius: 10px;
+    width: 600px;
+    margin: 50px auto; /* Zwiększony margines górny dla przesunięcia tabeli */
+    background-color: #2c3e50; /* Jasne tło */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+}
+
+/* Nazwa postaci nad tabelą */
+.character-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: -20px; /* Zmniejszenie marginesu dolnego, aby nazwa była bliżej tabeli */
+    text-align: center;
+    background-color: #fffbea; /* Jasno-żółte tło */
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: 2px solid #ffd700;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    position: relative;
+    top: 30px; /* Przesunięcie w dół */
+    margin: auto;
+}
+
+
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.image-cell {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.details-cell {
+    flex: 2;
+    padding: 10px;
+}
+
+.character-portrait {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid red;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #000000;
+}
+
+.info-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.info-details-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-details-table td:first-child {
+    font-weight: bold;
+    color: white;
+}
+
+.info-details-table td:last-child {
+    text-align: left;
+    color: white;
+}
+
+.rating-image {
+    width: 30px;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.weaponicon-image {
+    width: 40px;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.element-image {
+    width: 40px;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }

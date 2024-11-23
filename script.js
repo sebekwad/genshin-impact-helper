@@ -5,69 +5,90 @@ document.addEventListener('DOMContentLoaded', () => {
     const characterContents = document.querySelectorAll('.character-content');
     const subtabButtons = document.querySelectorAll('.subtab-button');
     const subtabContents = document.querySelectorAll('.subtab-content');
-	const ownedCheckboxes = document.querySelectorAll('.owned-checkbox');
-	const sidebar = document.querySelector('.sidebar');
+    const ownedCheckboxes = document.querySelectorAll('.owned-checkbox');
+    const sidebar = document.querySelector('.sidebar');
     const toggleButton = document.getElementById('toggleSidebar');
 
+    // Funkcja do zapisywania aktualnego stanu zakładek i podzakładek
+    function saveCurrentTabAndSubtab() {
+        const activeCharacter = document.querySelector('.character-content.active');
+        const activeSubtab = document.querySelector('.subtab-content.active');
+
+        if (activeCharacter) {
+            localStorage.setItem('activeCharacter', activeCharacter.id);
+        }
+        if (activeSubtab) {
+            localStorage.setItem('activeSubtab', activeSubtab.id);
+        }
+    }
+
+    // Funkcja do przywracania stanu zakładek i podzakładek
+    function restoreTabsState() {
+        const activeCharacterId = localStorage.getItem('activeCharacter');
+        const activeSubtabId = localStorage.getItem('activeSubtab');
+
+        if (activeCharacterId) {
+            document.getElementById(activeCharacterId)?.classList.add('active');
+            document.querySelector(`[data-character="${activeCharacterId}"]`)?.classList.add('active');
+        }
+
+        if (activeSubtabId) {
+            document.getElementById(activeSubtabId)?.classList.add('active');
+            document.querySelector(`[data-subtab="${activeSubtabId}"]`)?.classList.add('active');
+        }
+    }
+
+    // Obsługa przycisku zwijania sidebaru
     toggleButton.addEventListener('click', () => {
         sidebar.classList.toggle('collapsed');
-        // Zmień ikonę przycisku na podstawie stanu sidebaru
         toggleButton.textContent = sidebar.classList.contains('collapsed') ? '⮞' : '⮜';
     });
 
-    // Przełącznik trybu ciemnego
+    // Obsługa trybu ciemnego
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
     });
 
-    // Wyszukiwanie postaci
+    // Obsługa wyszukiwania postaci
     characterSearch.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    characterButtons.forEach(button => {
-        const characterName = button.textContent.toLowerCase();
-        const listItem = button.closest('li'); // Pobieramy całe <li>, w którym znajduje się button i checkbox
+        const query = e.target.value.toLowerCase();
+        characterButtons.forEach(button => {
+            const characterName = button.textContent.toLowerCase();
+            const listItem = button.closest('li');
 
-        if (listItem) {
-            listItem.style.display = characterName.includes(query) ? '' : 'none';
-        }
-    });
-});
-
-
-    // Obsługa przełączania zakładek
-    characterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const characterId = button.getAttribute('data-character');
-			characterButtons.forEach(btn => btn.classList.remove('active'));
-            characterContents.forEach(content => content.classList.remove('active'));
-			button.classList.add('active');
-            document.getElementById(characterId).classList.add('active');
+            if (listItem) {
+                listItem.style.display = characterName.includes(query) ? '' : 'none';
+            }
         });
     });
 
-    // Obsługa przełączania podzakładek
+    // Obsługa kliknięcia zakładek postaci
+    characterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const characterId = button.getAttribute('data-character');
+            characterButtons.forEach(btn => btn.classList.remove('active'));
+            characterContents.forEach(content => content.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(characterId).classList.add('active');
+
+            saveCurrentTabAndSubtab(); // Zapisz stan
+        });
+    });
+
+    // Obsługa kliknięcia podzakładek
     subtabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const subtabId = button.getAttribute('data-subtab');
             subtabButtons.forEach(btn => btn.classList.remove('active'));
             subtabContents.forEach(content => content.classList.remove('active'));
+
             button.classList.add('active');
             document.getElementById(subtabId).classList.add('active');
-			
-			updateSidebarHeight();  // Aktualizuj wysokość sidebaru
+
+            saveCurrentTabAndSubtab(); // Zapisz stan
         });
     });
-
-    function updateSidebarHeight() {
-    const activeSubtabContent = document.querySelector('.subtab-content.active');
-    const sidebar = document.querySelector('.sidebar');
-
-    if (activeSubtabContent && sidebar) {
-        const contentHeight = activeSubtabContent.scrollHeight;
-        sidebar.style.height = `${contentHeight}px`;
-    }
-}
-
 
     // Tooltipy
     characterButtons.forEach(button => {
@@ -96,92 +117,52 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltip.remove();
         }
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Definicja ownedCheckboxes
-    const ownedCheckboxes = document.querySelectorAll('.owned-checkbox');
+    // Przywrócenie stanu zakładek i podzakładek po odświeżeniu
+    restoreTabsState();
 
-    // Sprawdzenie, czy istnieją checkboxy
+    // Obsługa ownedCheckboxes
     if (ownedCheckboxes.length > 0) {
-        // Wczytanie zaznaczenia z localStorage
         ownedCheckboxes.forEach(checkbox => {
             const characterId = checkbox.getAttribute('data-character');
             const isOwned = localStorage.getItem(`owned_${characterId}`) === 'true';
             checkbox.checked = isOwned;
-        });
 
-        // Obsługa zmiany zaznaczenia postaci
-        ownedCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 const characterId = checkbox.getAttribute('data-character');
                 localStorage.setItem(`owned_${characterId}`, checkbox.checked);
                 updateTeamsDisplay();
             });
         });
-    } else {
-        console.warn("Nie znaleziono elementów .owned-checkbox");
     }
 
-    // Funkcja do aktualizacji koloru i pogrubienia posiadanych postaci w sekcji "Teams"
-function updateTeamsDisplay() {
-    const teams = document.querySelectorAll('.team'); // Znajduje wszystkie drużyny
+    // Aktualizacja wyświetlania drużyn
+    function updateTeamsDisplay() {
+        const teams = document.querySelectorAll('.team');
+        teams.forEach(team => {
+            const characterNameElements = team.querySelectorAll('p[data-character]');
+            let ownedCharacterCount = 0;
 
-    teams.forEach(team => {
-        const characterNameElements = team.querySelectorAll('p[data-character]');
-        let ownedCharacterCount = 0;
+            characterNameElements.forEach(element => {
+                const characterId = element.getAttribute('data-character');
+                const isOwned = localStorage.getItem(`owned_${characterId}`) === 'true';
 
-        characterNameElements.forEach(element => {
-            const characterId = element.getAttribute('data-character');
-            const isOwned = localStorage.getItem(`owned_${characterId}`) === 'true';
+                if (isOwned) {
+                    element.style.color = 'green';
+                    element.style.fontWeight = 'bold';
+                    ownedCharacterCount++;
+                } else {
+                    element.style.color = '';
+                    element.style.fontWeight = '';
+                }
+            });
 
-            if (isOwned) {
-                element.style.color = 'green';
-                element.style.fontWeight = 'bold';
-                ownedCharacterCount++;
-            } else {
-                element.style.color = '';
-                element.style.fontWeight = '';
+            const teamTitle = team.querySelector('h3');
+            if (teamTitle) {
+                teamTitle.style.color = ownedCharacterCount === 4 ? 'green' : '';
             }
         });
+    }
 
-        // Znajduje <h3> wewnątrz bieżącego kontenera .team
-        const teamTitle = team.querySelector('h3');
-
-        if (teamTitle) {
-            teamTitle.style.color = ownedCharacterCount === 4 ? 'green' : '';
-        }
-    });
-}
-
-
-    updateTeamsDisplay(); // Aktualizacja koloru postaci przy ładowaniu strony
-});
-
-
-// Zdefiniowanie zmiennej subtabContents
-const subtabContents = document.querySelectorAll('.subtab-content');
-
-// Sprawdzenie, czy subtabContents istnieje
-if (subtabContents.length > 0) {
-    // Twoja logika w updateTeamsDisplay
     updateTeamsDisplay();
-} else {
-    console.warn("Nie znaleziono elementów .subtab-content");
-}
-
-function updateTeamsDisplay() {
-    subtabContents.forEach(content => {
-        const characterNameElements = content.querySelectorAll('p[data-character]');
-        if (characterNameElements.length === 0) {
-            console.warn("Nie znaleziono elementów p[data-character] w sekcji Teams.");
-        }
-        characterNameElements.forEach(element => {
-            const characterId = element.getAttribute('data-character');
-            const isOwned = localStorage.getItem(`owned_${characterId}`) === 'true';
-            element.style.color = isOwned ? 'green' : '';
-        });
-    });
-}
-
-    updateSidebarHeight();
+});
