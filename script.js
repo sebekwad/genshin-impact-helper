@@ -9,6 +9,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const toggleButton = document.getElementById('toggleSidebar');
 
+    // Funkcja do automatycznego otwierania pierwszej podzakładki
+    function openFirstSubtab(characterId) {
+        const characterSection = document.getElementById(characterId);
+        if (characterSection) {
+            const firstSubtabButton = characterSection.querySelector('.subtab-button');
+            const firstSubtabContent = characterSection.querySelector('.subtab-content');
+
+            if (firstSubtabButton && firstSubtabContent) {
+                // Usuń aktywne klasy z innych zakładek i podzakładek
+                subtabButtons.forEach(btn => btn.classList.remove('active'));
+                characterSection.querySelectorAll('.subtab-content').forEach(content => content.classList.remove('active'));
+
+                // Aktywuj pierwszą podzakładkę
+                firstSubtabButton.classList.add('active');
+                firstSubtabContent.classList.add('active');
+            }
+        }
+    }
+
+    // Obsługa kliknięcia zakładek postaci
+    characterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const characterId = button.getAttribute('data-character');
+            characterButtons.forEach(btn => btn.classList.remove('active'));
+            characterContents.forEach(content => content.classList.remove('active'));
+
+            // Aktywacja zakładki
+            button.classList.add('active');
+            const characterSection = document.getElementById(characterId);
+            if (characterSection) {
+                characterSection.classList.add('active');
+
+                // Automatycznie otwórz pierwszą podzakładkę
+                openFirstSubtab(characterId);
+            }
+
+            // Dostosuj wysokość sidebaru
+            adjustSidebarHeight();
+        });
+    });
+
+    // Funkcja do dostosowania wysokości sidebaru
+    function adjustSidebarHeight() {
+        const activeCharacter = document.querySelector('.character-content.active');
+        if (activeCharacter) {
+            const activeHeight = activeCharacter.offsetHeight;
+            sidebar.style.height = `${activeHeight}px`;
+        } else {
+            sidebar.style.height = 'auto';
+        }
+    }
+
+    // Wywołaj dostosowanie wysokości przy ładowaniu strony
+    adjustSidebarHeight();
+    
     // Funkcja do zapisywania aktualnego stanu zakładek i podzakładek
     function saveCurrentTabAndSubtab() {
         const activeCharacter = document.querySelector('.character-content.active');
