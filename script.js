@@ -219,5 +219,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    updateTeamsDisplay();
+    const characterFilter = document.getElementById('character-filter');
+    const teams = document.querySelectorAll('.team');
+
+    // Funkcja filtrowania drużyn
+    function filterTeams() {
+        const selectedCharacter = characterFilter.value;
+        teams.forEach(team => {
+            const charactersInTeam = Array.from(
+                team.querySelectorAll('p[data-character]')
+            ).map(p => p.getAttribute('data-character'));
+
+            // Wyświetl drużynę, jeśli zawiera wybraną postać lub jeśli nie wybrano filtru
+            if (!selectedCharacter || charactersInTeam.includes(selectedCharacter)) {
+                team.style.display = '';
+            } else {
+                team.style.display = 'none';
+            }
+        });
+    }
+
+    // Obsługa zmiany wyboru w filtrze
+    characterFilter.addEventListener('change', filterTeams);
+
+    // Wywołanie filtrowania po załadowaniu strony (jeśli domyślny filtr ma być aktywny)
+    filterTeams();
+	
+	updateTeamsDisplay();
 });
