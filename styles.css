@@ -69,6 +69,13 @@ body, html {
 .main-content {
     padding: 20px;
     overflow-y: auto;
+	transition: margin-left 0.3s ease, width 0.3s ease; /* Płynne przejście */
+    margin-left: 0px; /* Standardowa szerokość sidebaru */
+}
+
+.main-content.expanded {
+    margin-left: -200px; /* Usuń przesunięcie, gdy sidebar jest zwinięty */
+   width: 100%; /* Rozciągnij na pełną szerokość */
 }
 
 .subtab-content {
@@ -147,12 +154,6 @@ button:hover {
 .team-comment {
     font-size: 14px;
     color: #666;
-}
-
-/* Stylizacja dla posiadanych postaci */
-.team-role p[data-character].owned {
-    color: green;
-    font-weight: bold;
 }
 
 /* Stylizacja sekcji Strengths & Weaknesses */
@@ -266,6 +267,12 @@ button:hover {
    transform: scale(1.8); /* Powiększa checkboxa 1,5 razy */
 }
 
+/* Stylizacja dla posiadanych postaci */
+.team-role p[data-character].owned {
+    color: green;
+    font-weight: bold;
+}
+
 
 
 
@@ -327,7 +334,7 @@ button:hover {
 }
 
 .character-portrait {
-    width: 381px;
+    width: 330px;
     height: auto;
     border-radius: 10px;
     border: 2px solid red;
@@ -381,4 +388,13 @@ button:hover {
     padding: 10px;
     margin-top: 10px;
     vertical-align: middle; /* Ustawia obraz na środku tekstu */
+}
+
+.filter-container {
+    margin-bottom: 20px;
+}
+
+#character-filter {
+    padding: 5px;
+    font-size: 14px;
 }
