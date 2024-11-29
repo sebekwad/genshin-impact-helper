@@ -97,6 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleButton.addEventListener('click', () => {
         sidebar.classList.toggle('collapsed');
         toggleButton.textContent = sidebar.classList.contains('collapsed') ? '⮞' : '⮜';
+		
+		// Dodaj lub usuń klasę 'expanded' na głównym elemencie zawartości
+        const mainContent = document.querySelector('.main-content');
+        if (sidebar.classList.contains('collapsed')) {
+            mainContent.classList.add('expanded');
+        } else {
+            mainContent.classList.remove('expanded');
+        }
     });
 
     // Obsługa trybu ciemnego
@@ -176,74 +184,147 @@ document.addEventListener('DOMContentLoaded', () => {
     // Przywrócenie stanu zakładek i podzakładek po odświeżeniu
     restoreTabsState();
 
-    // Obsługa ownedCheckboxes
-    if (ownedCheckboxes.length > 0) {
-        ownedCheckboxes.forEach(checkbox => {
-            const characterId = checkbox.getAttribute('data-character');
-            const isOwned = localStorage.getItem(`owned_${characterId}`) === 'true';
-            checkbox.checked = isOwned;
-
-            checkbox.addEventListener('change', () => {
-                const characterId = checkbox.getAttribute('data-character');
-                localStorage.setItem(`owned_${characterId}`, checkbox.checked);
-                updateTeamsDisplay();
-            });
-        });
-    }
-
-    // Aktualizacja wyświetlania drużyn
-    function updateTeamsDisplay() {
-        const teams = document.querySelectorAll('.team');
-        teams.forEach(team => {
-            const characterNameElements = team.querySelectorAll('p[data-character]');
-            let ownedCharacterCount = 0;
-
-            characterNameElements.forEach(element => {
-                const characterId = element.getAttribute('data-character');
-                const isOwned = localStorage.getItem(`owned_${characterId}`) === 'true';
-
-                if (isOwned) {
-                    element.style.color = 'green';
-                    element.style.fontWeight = 'bold';
-                    ownedCharacterCount++;
-                } else {
-                    element.style.color = '';
-                    element.style.fontWeight = '';
-                }
-            });
-
-            const teamTitle = team.querySelector('h3');
-            if (teamTitle) {
-                teamTitle.style.color = ownedCharacterCount === 4 ? 'green' : '';
-            }
-        });
-    }
-
+    
+	
     const characterFilter = document.getElementById('character-filter');
+    const roleFilter = document.getElementById('role-filter');
     const teams = document.querySelectorAll('.team');
 
     // Funkcja filtrowania drużyn
     function filterTeams() {
-        const selectedCharacter = characterFilter.value;
-        teams.forEach(team => {
-            const charactersInTeam = Array.from(
-                team.querySelectorAll('p[data-character]')
-            ).map(p => p.getAttribute('data-character'));
+        const selectedCharacter = characterFilter.value.trim();
+        const selectedRole = roleFilter.value.trim();
 
-            // Wyświetl drużynę, jeśli zawiera wybraną postać lub jeśli nie wybrano filtru
-            if (!selectedCharacter || charactersInTeam.includes(selectedCharacter)) {
+        
+
+        teams.forEach(team => {
+            let isVisible = false;
+
+            // Iteracja po wszystkich postaciach w drużynie
+            team.querySelectorAll('.team-role').forEach(roleElement => {
+                const characterName = roleElement.querySelector('p[data-character]')?.getAttribute('data-character')?.trim();
+                const characterRole = roleElement.querySelector('p:nth-of-type(2)')?.textContent?.trim();
+
+                
+
+                // Sprawdź, czy postać i rola pasują w ramach jednego roleElement
+                if (
+                    (!selectedCharacter || characterName === selectedCharacter) &&
+                    (!selectedRole || characterRole === selectedRole)
+                ) {
+                    isVisible = true;
+                }
+            });
+
+            // Pokaż lub ukryj drużynę na podstawie widoczności
+            if (isVisible) {
+                
                 team.style.display = '';
             } else {
+                
                 team.style.display = 'none';
             }
         });
     }
 
-    // Obsługa zmiany wyboru w filtrze
+    // Obsługa zmiany wyboru w filtrach
     characterFilter.addEventListener('change', filterTeams);
+    roleFilter.addEventListener('change', filterTeams);
 
-    // Wywołanie filtrowania po załadowaniu strony (jeśli domyślny filtr ma być aktywny)
+    // Wywołanie filtrowania po załadowaniu strony
     filterTeams();
 	
-	updateTeamsDisplay();
+	
+	
+	// Aktualizacja wyświetlania drużyn z uwzględnieniem duplikatów
+    function updateTeamsDisplay() {
+        const teamArticle = document.querySelector('article#teams-TEAMS.subtab-content');
+        if (!teamArticle) return;
+
+        const teams = teamArticle.querySelectorAll('.team');
+        const teamHashes = new Set(); // Set do przechowywania hashy drużyn
+        const duplicateTeams = new Set(); // Set do przechowywania duplikatów
+
+        // Iterujemy po drużynach, by wykryć duplikaty
+        teams.forEach(team => {
+            const characterNameElements = team.querySelectorAll('p[data-character]');
+            let characterNames = [];
+
+            // Zbieramy imiona postaci w drużynie
+            characterNameElements.forEach(element => {
+                const characterId = element.getAttribute('data-character');
+                characterNames.push(characterId);
+            });
+
+            // Generujemy unikalny hash dla drużyny (sortowanie imion postaci)
+            const teamHash = characterNames.sort().join('-'); // Sortowanie, aby uwzględniało kolejność
+            if (teamHashes.has(teamHash)) {
+                duplicateTeams.add(team); // Jeśli drużyna już istnieje, to jest duplikatem
+            } else {
+                teamHashes.add(teamHash); // Dodajemy hash drużyny, jeśli nie było jeszcze duplikatu
+            }
+        });
+
+        // Dodawanie czerwonego "X" do tytułów drużyn, które są duplikatami
+        teams.forEach(team => {
+            const teamTitle = team.querySelector('h3');
+            if (duplicateTeams.has(team)) {
+                if (!team.querySelector('.duplicate-mark')) {
+                    const duplicateMark = document.createElement('span');
+                    duplicateMark.textContent = 'duplicated team'; // Czerwony X
+                    duplicateMark.classList.add('duplicate-mark');
+                    duplicateMark.style.color = 'red';
+                    teamTitle.appendChild(duplicateMark); // Dodajemy znak "X" do tytułu drużyny
+                }
+            } else {
+                const existingMark = team.querySelector('.duplicate-mark');
+                if (existingMark) {
+                    existingMark.remove(); // Usuwamy znak "X" dla drużyn, które nie są duplikatami
+                }
+            }
+        });
+    }
+	
+	
+	function updateTeamsDisplay() {
+    const teams = document.querySelectorAll('.team'); // Drużyny w sekcji teams
+    teams.forEach(team => {
+        const characterNameElements = team.querySelectorAll('p[data-character]');
+        let ownedCharacterCount = 0;
+
+        // Iterujemy po wszystkich postaciach w drużynie
+        characterNameElements.forEach(element => {
+            const characterId = element.getAttribute('data-character');
+            const isOwned = document.querySelector(`.owned-checkbox[data-character="${characterId}"]`)?.checked;
+
+            // Zmiana stylu posiadanych postaci
+            if (isOwned) {
+                element.style.color = 'green';
+                element.style.fontWeight = 'bold';
+                ownedCharacterCount++;
+            } else {
+                element.style.color = '';
+                element.style.fontWeight = '';
+            }
+        });
+
+        // Zmiana koloru nazwy drużyny
+        const teamTitle = team.querySelector('h3');
+        if (teamTitle) {
+            teamTitle.style.color = ownedCharacterCount === 4 ? 'green' : '';
+        }
+    });
+}
+
+// Obsługa zmiany stanu posiadanych postaci
+document.querySelectorAll('.owned-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', updateTeamsDisplay);
+});
+
+// Wywołanie funkcji przy ładowaniu strony
+updateTeamsDisplay();
+
+
+    // Wywołanie funkcji do aktualizacji wyświetlania drużyn po załadowaniu strony
+    updateTeamsDisplay();
 });
