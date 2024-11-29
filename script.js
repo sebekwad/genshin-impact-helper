@@ -107,9 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Sprawdź zapisany tryb w localStorage
+    if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    }
+
     // Obsługa trybu ciemnego
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', isDarkMode); // Zapisz stan w localStorage
     });
 
     // Obsługa wyszukiwania postaci
@@ -318,7 +324,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Obsługa zmiany stanu posiadanych postaci
 document.querySelectorAll('.owned-checkbox').forEach(checkbox => {
+<<<<<<< Updated upstream
     checkbox.addEventListener('change', updateTeamsDisplay);
+});
+
+// Wywołanie funkcji przy ładowaniu strony
+updateTeamsDisplay();
+
+
+    // Wywołanie funkcji do aktualizacji wyświetlania drużyn po załadowaniu strony
+    updateTeamsDisplay();
+=======
+    const characterId = checkbox.getAttribute('data-character');
+    
+    // Przy wczytywaniu ustaw stan checkboxa na podstawie localStorage
+    checkbox.checked = localStorage.getItem(`owned_${characterId}`) === 'true';
+
+    checkbox.addEventListener('change', () => {
+        const isOwned = checkbox.checked;
+        localStorage.setItem(`owned_${characterId}`, isOwned); // Zapis do localStorage
+        updateTeamsDisplay(); // Aktualizuj wyświetlanie drużyn
+    });
+>>>>>>> Stashed changes
 });
 
 // Wywołanie funkcji przy ładowaniu strony

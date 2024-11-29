@@ -70,12 +70,20 @@ body, html {
     padding: 20px;
     overflow-y: auto;
 	transition: margin-left 0.3s ease, width 0.3s ease; /* Płynne przejście */
+<<<<<<< Updated upstream
     margin-left: 0px; /* Standardowa szerokość sidebaru */
+=======
+	width: 100%;
+>>>>>>> Stashed changes
 }
 
 .main-content.expanded {
     margin-left: -200px; /* Usuń przesunięcie, gdy sidebar jest zwinięty */
+<<<<<<< Updated upstream
    width: 100%; /* Rozciągnij na pełną szerokość */
+=======
+    width: 100%; /* Rozciągnij na pełną szerokość */
+>>>>>>> Stashed changes
 }
 
 .subtab-content {
@@ -99,8 +107,13 @@ button:hover {
 }
 
 .dark-mode {
-    background-color: #000000;
-    color: white;
+    background-color: #1e1e1e; /* Ciemne tło */
+    color: #ffffff; /* Jasny tekst */
+}
+
+.dark-mode .character-content {
+    background-color: #1e1e1e; /* Ciemne tło */
+    color: #ffffff; /* Jasny tekst */
 }
 
 .tooltip {
