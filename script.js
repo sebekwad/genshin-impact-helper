@@ -324,17 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Obsługa zmiany stanu posiadanych postaci
 document.querySelectorAll('.owned-checkbox').forEach(checkbox => {
-<<<<<<< Updated upstream
-    checkbox.addEventListener('change', updateTeamsDisplay);
-});
-
-// Wywołanie funkcji przy ładowaniu strony
-updateTeamsDisplay();
-
-
-    // Wywołanie funkcji do aktualizacji wyświetlania drużyn po załadowaniu strony
-    updateTeamsDisplay();
-=======
     const characterId = checkbox.getAttribute('data-character');
     
     // Przy wczytywaniu ustaw stan checkboxa na podstawie localStorage
@@ -345,7 +334,6 @@ updateTeamsDisplay();
         localStorage.setItem(`owned_${characterId}`, isOwned); // Zapis do localStorage
         updateTeamsDisplay(); // Aktualizuj wyświetlanie drużyn
     });
->>>>>>> Stashed changes
 });
 
 // Wywołanie funkcji przy ładowaniu strony
